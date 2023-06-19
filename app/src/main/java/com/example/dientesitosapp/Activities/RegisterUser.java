@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.example.dientesitosapp.R;
 
 public class RegisterUser extends AppCompatActivity {
-      Button    btnRegistar;
+    private   Button    btnRegistar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

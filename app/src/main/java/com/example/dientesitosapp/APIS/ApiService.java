@@ -1,13 +1,14 @@
 package com.example.dientesitosapp.APIS;
 
-import com.example.dientesitosapp.Models.LoginRequest;
-import com.example.dientesitosapp.Models.LoginResponse;
+import com.example.dientesitosapp.Models.Paciente;
+
+import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
 
 public interface ApiService {
-      @POST("Login")
-    Call<LoginResponse>LOGIN_RESPONSE_CALL(@Body LoginRequest request);
+
+    @GET("paciente")
+    Call<List<Paciente>> getPaciente();
 }

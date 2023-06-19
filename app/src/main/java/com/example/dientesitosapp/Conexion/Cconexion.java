@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Cconexion {
 
-    private static final String URL ="";
+    private static final String URL ="http://zhanzheng-001-site1.dtempurl.com/api/";
     private static Retrofit retrofit = null;
 
    public static Retrofit getRetrofit() {
