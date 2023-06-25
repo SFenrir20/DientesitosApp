@@ -6,7 +6,7 @@ public class Paciente {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String direccion;
-    private String contrasena;
+    private String constrasena;
     private String telefono;
     private String edad;
     private int estado;
@@ -14,14 +14,14 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(int idpaciente, String documento, String nombre, String apellidoPaterno, String apellidoMaterno, String direccion, String contrasena, String telefono, String edad, int estado) {
+    public Paciente(int idpaciente, String documento, String nombre, String apellidoPaterno, String apellidoMaterno, String direccion, String constrasena, String telefono, String edad, int estado) {
         this.idpaciente = idpaciente;
         this.documento = documento;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.direccion = direccion;
-        this.contrasena = contrasena;
+        this.constrasena = constrasena;
         this.telefono = telefono;
         this.edad = edad;
         this.estado = estado;
@@ -75,12 +75,12 @@ public class Paciente {
         this.direccion = direccion;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getConstrasena() {
+        return constrasena;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setConstrasena(String constrasena) {
+        this.constrasena = constrasena;
     }
 
     public String getTelefono() {

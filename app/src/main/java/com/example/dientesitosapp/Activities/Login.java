@@ -37,11 +37,13 @@ public class Login extends AppCompatActivity
         _edUser = findViewById(R.id.edtUsuario);
         _edPass = findViewById(R.id.edtPasword);
 
+
         apiService = Cconexion.getRetrofit().create(ApiService.class);
         _btnLogin.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view) {
+
                 String username = _edUser.getText().toString();
                 String password = _edPass.getText().toString();
 
@@ -50,18 +52,23 @@ public class Login extends AppCompatActivity
                     @Override
                     public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response)
                     {
+                        boolean found = false;
                         if (response.isSuccessful())
                         {
                             pacientes = response.body();
-                            boolean found = false;
+
                             for (Paciente paciente : pacientes)
                             {
-                                if (username != null && password != null && username.equals(paciente.getDocumento()) && password.equals(paciente.getContrasena())) {
-                                    // Código para el inicio de sesión exitoso
-                                    Intent intent = new Intent(Login.this, RegisterUser.class);
-                                    startActivity(intent);
-                                    finish();
-                                    break;
+                                String passwordConvert = sha256.sha256(password);
+
+                                if (username.equalsIgnoreCase(paciente.getDocumento()) && passwordConvert.equalsIgnoreCase(paciente.getConstrasena()))
+                                    {
+                                        // Código para el inicio de sesión exitoso
+                                        found=true;
+                                        Intent intent = new Intent(Login.this, RegisterUser.class);
+                                        startActivity(intent);
+                                        finish();
+                                        break;
                                 } else {
                                     // Código para el inicio de sesión fallido
                                     AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
@@ -69,7 +76,7 @@ public class Login extends AppCompatActivity
                                     error.show();
                                 }
                             }
-                            if (!found)
+                            if (found)
                             {
                                 AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
                                 error.setMessage("Error");
