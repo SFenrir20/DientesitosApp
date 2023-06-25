@@ -10,5 +10,5 @@ import retrofit2.http.GET;
 public interface ApiService {
 
     @GET("paciente")
-    Call<List<Paciente>> getPaciente();
+    public abstract Call<List<Paciente>> getPaciente();
 }

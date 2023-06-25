@@ -3,14 +3,11 @@ package com.example.dientesitosapp.Activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.dientesitosapp.APIS.ApiService;
 import com.example.dientesitosapp.Conexion.Cconexion;
@@ -22,76 +19,80 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Tag;
 
-public class Login extends AppCompatActivity {
 
-      private  Button btnLogin;
-      private   EditText edUser, edPass;
-
+public class Login extends AppCompatActivity
+{
+      private Button _btnLogin;
+      private EditText _edUser, _edPass;
       private ApiService apiService;
       private List<Paciente> pacientes;
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         btnLogin = findViewById(R.id.btn_Iniciar);
-         edUser = findViewById(R.id.txtUsuario);
-         edPass = findViewById(R.id.edPasword);
-         //Crear instancia de api Service utilixando retrofit
-        apiService = Cconexion.getRetrofit().create(ApiService.class);
+        _btnLogin = findViewById(R.id.btnlogin);
+        _edUser = findViewById(R.id.edtUsuario);
+        _edPass = findViewById(R.id.edtPasword);
 
-        //manejar el evento de inicio de sesion el boton
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        apiService = Cconexion.getRetrofit().create(ApiService.class);
+        _btnLogin.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
-                String usermane = edUser.getText().toString();
-                String password = edPass.getText().toString();
-                for (Paciente paciente :pacientes){
-                    if(paciente.getDocumento().equals(usermane) && paciente.getContrasena().equals(password)){
-                        Intent intent = new Intent(Login.this,RegisterUser.class);
-                        startActivity(intent);
-                        break;
-                    }else{
-                        AlertDialog.Builder error = new AlertDialog.Builder(view.getContext());
-                        error.setMessage("Erro");
-                        error.show();
-                    }
-                }
-            }
-        });
+                String username = _edUser.getText().toString();
+                String password = _edPass.getText().toString();
 
-        Call<List<Paciente>> call = apiService.getPaciente();
-        call.enqueue(new Callback<List<Paciente>>() {
-            @Override
-            public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response) {
-                if (response.isSuccessful()){
-                    pacientes = response.body();
-                }else{
-                  //  Toast.makeText(null,"erro",Toast.LENGTH_SHORT);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Paciente>> call, Throwable t) {
-             //   Toast.makeText(null,"Ocurrio un Erro",Toast.LENGTH_SHORT);
-            }
-        });
-    }
-    private void showErrorDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Error de inicio de sesión")
-                .setMessage("El nombre de usuario o la contraseña son incorrectos.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                Call<List<Paciente>> call = apiService.getPaciente();
+                call.enqueue(new Callback<List<Paciente>>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Acción a realizar al hacer clic en el botón "Aceptar"
+                    public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response)
+                    {
+                        if (response.isSuccessful())
+                        {
+                            pacientes = response.body();
+                            boolean found = false;
+                            for (Paciente paciente : pacientes)
+                            {
+                                if (username != null && password != null && username.equals(paciente.getDocumento()) && password.equals(paciente.getContrasena())) {
+                                    // Código para el inicio de sesión exitoso
+                                    Intent intent = new Intent(Login.this, RegisterUser.class);
+                                    startActivity(intent);
+                                    finish();
+                                    break;
+                                } else {
+                                    // Código para el inicio de sesión fallido
+                                    AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
+                                    error.setMessage("Error en las credenciales");
+                                    error.show();
+                                }
+                            }
+                            if (!found)
+                            {
+                                AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
+                                error.setMessage("Error");
+                                error.show();
+                            }
+                        } else
+                        {
+                            AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
+                            error.setMessage("Error de conexión");
+                            error.show();
+                        }
                     }
-                })
-                .setCancelable(false)
-                .show();
+
+                    @Override
+                    public void onFailure(Call<List<Paciente>> call, Throwable t)
+                    {
+                        AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
+                        error.setMessage("Error de conexión");
+                        error.show();
+                        t.printStackTrace();
+                    }
+                });
+            }
+        });
     }
 }
