@@ -18,7 +18,6 @@ public class sha256 {
                 if (hex.length() == 1) {
                     hexString.append('0');
                 }
-                //ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f
                 hexString.append(hex);
             }
 

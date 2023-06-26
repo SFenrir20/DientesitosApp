@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Spinner
-        android:id="@+id/spinner_sede"
+        android:id="@+id/spinnerSede"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -75,7 +75,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_sede" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSede" />
 
     <TextView
         android:id="@+id/textView4"
@@ -90,7 +90,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_Service" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTratamiento" />
 
     <TextView
         android:id="@+id/textView5"
@@ -105,7 +105,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_Doctor" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDoctor" />
 
     <TextView
         android:id="@+id/textView6"
@@ -120,10 +120,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+        app:layout_constraintTop_toBottomOf="@+id/edtDate" />
 
     <Button
-        android:id="@+id/btn_Reservar"
+        android:id="@+id/btnGrabar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -133,10 +133,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/edtTime" />
 
     <Spinner
-        android:id="@+id/spinner_Service"
+        android:id="@+id/spinnerTratamiento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -147,7 +147,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Spinner
-        android:id="@+id/spinner_Doctor"
+        android:id="@+id/spinnerDoctor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -158,7 +158,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/edtDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -174,7 +174,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editTextTime"
+        android:id="@+id/edtTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -183,6 +183,7 @@
         android:ems="10"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_Reservar"
+        app:layout_constraintStart_toEndOf="@+id/btnGrabar"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.dientesitosapp.APIS;
 
 import com.example.dientesitosapp.Models.Paciente;
+import com.example.dientesitosapp.Models.Sede;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface ApiService {
 
     @GET("paciente")
     public abstract Call<List<Paciente>> getPaciente();
+    @GET("sede")
+    public abstract Call<List<Sede>> getSede();
 }
