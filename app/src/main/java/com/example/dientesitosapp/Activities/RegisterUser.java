@@ -51,17 +51,14 @@ public class RegisterUser extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     sedes = response.body();
-                    String[] items = new String[sedes.size()];
-                    for(int i=0; i< sedes.size(); i++)
-                    {
-                        /*if(i==0)
-                        {
-                            items[i] = sedes.setDireccion("sede");
-                        }*/
-                        items[i] = sedes.get(i).getDireccion();
+                    String[] items = new String[sedes.size() + 1]; // Agregar 1 al tamaño para el elemento personalizado
+                    items[0] = "Seleccionar opción"; // Elemento personalizado en la primera posición
+                    for (int i = 0; i < sedes.size(); i++) {
+                        items[i + 1] = sedes.get(i).getDireccion();
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(RegisterUser.this, android.R.layout.simple_list_item_1, items);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterUser.this, android.R.layout.simple_list_item_1, items);
                     _spSede.setAdapter(adapter);
+                    _spSede.setSelection(0);
                 }
             }
 
