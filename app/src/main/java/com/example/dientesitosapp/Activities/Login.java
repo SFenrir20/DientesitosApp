@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ public class Login extends AppCompatActivity
       private EditText _edUser, _edPass;
       private ApiService apiService;
       private List<Paciente> pacientes;
+      private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -52,7 +54,6 @@ public class Login extends AppCompatActivity
                     @Override
                     public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response)
                     {
-                        boolean found = false;
                         if (response.isSuccessful())
                         {
                             pacientes = response.body();
@@ -64,7 +65,10 @@ public class Login extends AppCompatActivity
                                 if (username.equalsIgnoreCase(paciente.getDocumento()) && passwordConvert.equalsIgnoreCase(paciente.getConstrasena()))
                                     {
                                         // Código para el inicio de sesión exitoso
-                                        found=true;
+                                        preferences = getSharedPreferences("Session", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putInt("userId", paciente.getIdpaciente());
+                                        editor.apply();
                                         Intent intent = new Intent(Login.this, RegisterUser.class);
                                         startActivity(intent);
                                         finish();
@@ -75,12 +79,6 @@ public class Login extends AppCompatActivity
                                     error.setMessage("Error en las credenciales");
                                     error.show();
                                 }
-                            }
-                            if (found)
-                            {
-                                AlertDialog.Builder error = new AlertDialog.Builder(Login.this);
-                                error.setMessage("Error");
-                                error.show();
                             }
                         } else
                         {

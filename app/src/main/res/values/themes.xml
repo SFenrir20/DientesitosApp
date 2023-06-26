@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.DientesitosApp" parent="Base.Theme.DientesitosApp" />
+
+    <style name="Theme.DientesitosApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.DientesitosApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DientesitosApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
